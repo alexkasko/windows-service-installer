@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.alexkasko.installer</groupId>
+        <artifactId>windows-service-installer-parent</artifactId>
+        <version>1.0.2-SNAPSHOT</version>
+    </parent>
+    <artifactId>windows-service-installer-test</artifactId>
+    <packaging>jar</packaging>
+    <name>Maven Windows Service Installer Test Suite</name>
+
+    <description>
+        Maven plugin to build installers with Windows service support.
+    </description>
+    <url>https://github.com/alexkasko/windows-service-installer</url>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/alexkasko/windows-service-installer</url>
+        <connection>scm:git:https://github.com/alexkasko/windows-service-installer.git</connection>
+        <developerConnection>scm:git:https://github.com/alexkasko/windows-service-installer.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>Alex Kasko</name>
+            <email>mail@alexkasko.com</email>
+            <url>http://alexkasko.com</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <service.main.class>com.alexkasko.installer.testapp.Launcher</service.main.class>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>windows-service-installer-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${service.main.class}</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>../lib</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- to be tun with "mvn windows-service-installer:installer" -->
+                <groupId>${project.groupId}</groupId>
+                <artifactId>maven-windows-service-installer-plugin</artifactId>
+                <version>${project.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>windows-service-installer-common</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <prunsrvDaemonLauncherClass>${service.main.class}</prunsrvDaemonLauncherClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

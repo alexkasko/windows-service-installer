@@ -1,0 +1,5 @@
+Third-party resources:
+ - IzPack (http://izpack.org/), Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
+ - Commons daemon prunsrv (http://commons.apache.org/daemon/procrun.html), Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
+ - Launch4j (http://launch4j.sourceforge.net/), MIT License (http://www.opensource.org/licenses/mit-license.html)
+ - Install and uninstall Icons (http://deviantdark.deviantart.com/art/Oxygen-Refit-70199755), GNU LGPL License (http://www.gnu.org/copyleft/lesser.html)
