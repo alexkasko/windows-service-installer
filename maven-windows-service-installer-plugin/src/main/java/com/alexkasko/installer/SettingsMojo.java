@@ -242,6 +242,12 @@ public abstract class SettingsMojo extends AbstractMojo {
      * @parameter expression="${installer.prunsrvStdError}" default-value="logs\\std_err.txt"
      */
     protected String prunsrvStdError;
+    /**
+     * Whether to start service immediately after installation
+     *
+     * @parameter expression="${installer.prunsrvStartOnInstrall}" default-value="true"
+     */
+    protected boolean prunsrvStartOnInstrall;
 
     // Build parameters
 
@@ -440,5 +446,9 @@ public abstract class SettingsMojo extends AbstractMojo {
 
     public String getPrunsrvStdError() {
         return prunsrvStdError;
+    }
+
+    public boolean isPrunsrvStartOnInstrall() {
+        return prunsrvStartOnInstrall;
     }
 }

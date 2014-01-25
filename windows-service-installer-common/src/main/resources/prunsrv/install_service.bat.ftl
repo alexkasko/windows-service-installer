@@ -36,6 +36,8 @@ cd /d %APP_HOME%
 --LogPrefix ${prunsrvLogPrefix} ^
 --LogLevel ${prunsrvLogLevel}
 
+[#if prunsrvStartOnInstrall]
 net start ${prunsrvServiceName}
+[/#if]
 
 cd %CURRENT_DIR%

@@ -5,6 +5,8 @@ This plugin allows to build installers with support to be installed and run as W
 Installer is based on [izPack](http://izpack.org/), [PrunSrv](http://commons.apache.org/proper/commons-daemon/procrun.html)
 is used for Windows service management.
 
+[Maven-generated site](http://alexkasko.github.com/windows-service-installer/plugin).
+
 Plugin usage
 ------------
 
@@ -13,7 +15,7 @@ Add common library as a dependency:
     <dependency>
         <groupId>com.alexkasko.installer</groupId>
         <artifactId>windows-service-installer-common</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </dependency>
 
 Implement `com.alexkasko.installer.DaemonLauncher` in application launcher class:
@@ -38,7 +40,7 @@ Add plugin to build part of pom file:
             <dependency>
                 <groupId>com.alexkasko.installer</groupId>
                 <artifactId>windows-service-installer-common</artifactId>
-                <version>1.0.2</version>
+                <version>1.0.3</version>
             </dependency>
         </dependencies>
         <configuration>
@@ -55,6 +57,10 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**1.0.3** (2014-01-25)
+
+ * allow to not start service immediately after installation
 
 **1.0.2** (2013-12-17)
 
