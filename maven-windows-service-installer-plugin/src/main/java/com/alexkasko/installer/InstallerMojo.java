@@ -118,7 +118,7 @@ public class InstallerMojo extends SettingsMojo {
     }
 
     private void copyUninstall(File uninstallDir) {
-        if(use64BitJre) {
+        if(use64BitJre && !useX86LaunchersForX64Installer) {
             copyResourceToDir("classpath:/launchers/x64/install.exe", izpackDir);
             copyResourceToDir("classpath:/launchers/x64/uninstall.exe", uninstallDir);
         } else {
@@ -141,7 +141,7 @@ public class InstallerMojo extends SettingsMojo {
 
     private void copyAppData() throws IOException {
         for(String dir : appDataDirs) {
-            File source = new File(baserDir, "src/main/" + dir);
+            File source = new File(dir);
             copyDirectoryToDirectory(source, distDir);
         }
     }
@@ -204,7 +204,7 @@ public class InstallerMojo extends SettingsMojo {
             zip.putNextEntry(new ZipEntry(prefix + "/install.jar"));
             FileUtils.copyFile(izpackOutputFile, zip);
             zip.putNextEntry(new ZipEntry(prefix + "/install.exe"));
-            if(use64BitJre) {
+            if(use64BitJre && !useX86LaunchersForX64Installer) {
                 resStream = RESOURCE_LOADER.getResource("classpath:/launchers/x64/install.exe").getInputStream();
             } else {
                 resStream = RESOURCE_LOADER.getResource("classpath:/launchers/x86/install.exe").getInputStream();

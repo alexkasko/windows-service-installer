@@ -16,7 +16,7 @@ public abstract class SettingsMojo extends AbstractMojo {
     // Application parameters
 
     /**
-     * Application directories to be included into installer, relative to ${project.baseDir}/src/main
+     * Application directories to be included into installer
      *
      * @parameter expression="${installer.appDataDirs}"
      * @required
@@ -37,6 +37,13 @@ public abstract class SettingsMojo extends AbstractMojo {
      * @parameter expression="${installer.use64BitJre}" default-value="false"
      */
     protected boolean use64BitJre;
+    /**
+     * Use x86 launcher binaries for x64 installers instead of default x64 ones
+     *
+     * @parameter expression="${installer.useX86LaunchersForX64Installer}" default-value="false"
+     *
+     */
+    protected boolean useX86LaunchersForX64Installer;
 
     // IzPack parameters
 
@@ -365,6 +372,10 @@ public abstract class SettingsMojo extends AbstractMojo {
 
     public String getIzpackWindowsServicePackDescription() {
         return izpackWindowsServicePackDescription;
+    }
+
+    public boolean isUseX86LaunchersForX64Installer() {
+        return useX86LaunchersForX64Installer;
     }
 
     public String getPrunsrvLauncherJarFile() {

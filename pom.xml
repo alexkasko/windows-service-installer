@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.alexkasko.installer</groupId>
     <artifactId>windows-service-installer-parent</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Maven Windows Service Installer Plugin Parent</name>
 
