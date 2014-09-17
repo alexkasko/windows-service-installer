@@ -1,10 +1,15 @@
 package com.alexkasko.installer;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
+import ru.concerteza.util.io.CtzResourceUtils;
 
 import java.io.File;
 import java.util.List;
+
+import static ru.concerteza.util.io.CtzResourceUtils.readResourceToString;
 
 /**
  * Supertype for plugin, encapsulates settings
@@ -44,6 +49,30 @@ public abstract class SettingsMojo extends AbstractMojo {
      *
      */
     protected boolean useX86LaunchersForX64Installer;
+    /**
+     * Resource path to x86 installer launcher
+     *
+     * @parameter expression="${installer.installLauncher32Path}" default-value="classpath:/launchers/x86/install.exe"
+     */
+    protected String installLauncher32Path;
+    /**
+     * Resource path to x86 uninstaller launcher
+     *
+     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x86/uninstall.exe"
+     */
+    protected String uninstallLauncher32Path;
+    /**
+     * Resource path to x64 installer launcher
+     *
+     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/install.exe"
+     */
+    protected String installLauncher64Path;
+    /**
+     * Resource path to x64 uninstaller launcher
+     *
+     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/uninstall.exe"
+     */
+    protected String uninstallLauncher64Path;
 
     // IzPack parameters
 
@@ -62,7 +91,7 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Installer language, see http://izpack.org/documentation/installation-files.html#the-localization-element-locale
      *
-     * @parameter expression="${installer.izpackLang}" default-value="eng"
+     * @parameter expression="${installer.izpackLang}" default-value="xxx"
      */
     protected String izpackLang;
     /**
@@ -114,6 +143,30 @@ public abstract class SettingsMojo extends AbstractMojo {
      * default-value="Application will be installed as Windows Service using prunsrv tool from Apache Commons Daemon project, see http://commons.apache.org/daemon"
      */
     protected String izpackWindowsServicePackDescription;
+    /**
+     * Icon to be used on top of installer frame
+     *
+     * @parameter expression="${installer.izpackFrameIconPath}" default-value="classpath:/izpack/install.png"
+     */
+    protected String izpackFrameIconPath;
+    /**
+     * Icon to be used on Hello screen
+     *
+     * @parameter expression="${installer.izpackHelloIconPath}" default-value="classpath:/izpack/install.png"
+     */
+    protected String izpackHelloIconPath;
+    /**
+     * Definition of additional installer packs
+     *
+     * @parameter expression="${installer.izpackAdditionalPacksPath}" default-value="classpath:/izpack/addpacks.xml"
+     */
+    protected String izpackAdditionalPacksPath;
+    /**
+     * Definition of additional resources
+     *
+     * @parameter expression="${installer.izpackAdditionalResourcePaths}"
+     */
+    protected List<String> izpackAdditionalResourcePaths;
 
     // Prunsrv parameters
 
@@ -461,5 +514,17 @@ public abstract class SettingsMojo extends AbstractMojo {
 
     public boolean isPrunsrvStartOnInstrall() {
         return prunsrvStartOnInstrall;
+    }
+
+    public String getIzpackFrameIcon() {
+        return FilenameUtils.getName(izpackFrameIconPath);
+    }
+
+    public String getIzpackHelloIcon() {
+        return FilenameUtils.getName(izpackHelloIconPath);
+    }
+
+    public String getIzpackAdditionalPacks() {
+        return readResourceToString(izpackAdditionalPacksPath);
     }
 }

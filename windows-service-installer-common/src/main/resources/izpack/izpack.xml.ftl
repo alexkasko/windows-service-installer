@@ -5,7 +5,6 @@
     <info>
         <appname>${izpackAppName}</appname>
         <appversion>${izpackAppVersion}</appversion>
-        <!--<appsubpath>myapp</appsubpath>-->
         <uninstaller path="$INSTALL_PATH/uninstall" name="uninstall.jar"/>
         <!-- http://izpack.org/documentation/installation-files.html#built-in-conditions -->
         <!--<run-privileged condition="izpack.windowsinstall.vista|izpack.macinstall"/>-->
@@ -39,6 +38,10 @@
     </panels>
 
     <resources>
+        <!--res id="packsLang.xml_xxx" src="i18n/packsLang.xml_xxx"/-->
+        <res id="customicons.xml" src="customicons.xml"/>
+        <res id="JFrameIcon.png" src="${izpackFrameIcon}"/>
+        <res id="host.png" src="${izpackHelloIcon}"/>
         <res id="TargetPanel.dir.windows" src="default-install-dir.txt"/>
     </resources>
 
@@ -51,6 +54,7 @@
             <description>${izpackJREPackDescription}</description>
             <fileset dir="jre" targetdir="$INSTALL_PATH/jre"/>
         </pack>
+        ${izpackAdditionalPacks}
         <pack name="${izpackWindowsServicePackName}" required="no" preselected="yes" installGroups="windows_service_pack">
             <os family="windows"/>
             <description>${izpackWindowsServicePackDescription}</description>

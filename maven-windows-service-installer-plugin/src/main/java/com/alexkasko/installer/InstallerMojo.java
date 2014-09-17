@@ -74,6 +74,7 @@ public class InstallerMojo extends SettingsMojo {
             copyLibs(dirs.lib);
             copyLauncher(dirs.bin);
             File jre = copyJRE();
+            copyIzPackResources();
             runIzPackCompiler();
             packInstaller(jre);
             if(buildUnixDist) packDist();
@@ -119,11 +120,11 @@ public class InstallerMojo extends SettingsMojo {
 
     private void copyUninstall(File uninstallDir) {
         if(use64BitJre && !useX86LaunchersForX64Installer) {
-            copyResourceToDir("classpath:/launchers/x64/install.exe", izpackDir);
-            copyResourceToDir("classpath:/launchers/x64/uninstall.exe", uninstallDir);
+            copyResourceToDir(installLauncher64Path, izpackDir);
+            copyResourceToDir(uninstallLauncher64Path, uninstallDir);
         } else {
-            copyResourceToDir("classpath:/launchers/x86/install.exe", izpackDir);
-            copyResourceToDir("classpath:/launchers/x86/uninstall.exe", uninstallDir);
+            copyResourceToDir(installLauncher32Path, izpackDir);
+            copyResourceToDir(uninstallLauncher32Path, uninstallDir);
         }
     }
 
@@ -179,6 +180,21 @@ public class InstallerMojo extends SettingsMojo {
         return innerJre;
     }
 
+    private void copyIzPackResources() {
+        copyResourceToDir(izpackFrameIconPath, izpackDir);
+        copyResourceToDir(izpackHelloIconPath, izpackDir);
+        File lpdir = new File(izpackDir, "bin/langpacks/installer");
+        File flagdir = new File(izpackDir, "bin/langpacks/flags");
+        copyResourceToDir("classpath:/izpack/xxx.xml", lpdir);
+        copyResourceToDir("classpath:/izpack/xxx.gif", flagdir);
+        if (null != izpackAdditionalResourcePaths) {
+            File addres = new File(izpackDir, "addres");
+            for (String re : izpackAdditionalResourcePaths) {
+                copyResourceToDir(re, addres);
+            }
+        }
+    }
+
     private void runIzPackCompiler() throws Exception {
         PrintStream console = System.out;
         try {
@@ -205,9 +221,9 @@ public class InstallerMojo extends SettingsMojo {
             FileUtils.copyFile(izpackOutputFile, zip);
             zip.putNextEntry(new ZipEntry(prefix + "/install.exe"));
             if(use64BitJre && !useX86LaunchersForX64Installer) {
-                resStream = RESOURCE_LOADER.getResource("classpath:/launchers/x64/install.exe").getInputStream();
+                resStream = RESOURCE_LOADER.getResource(installLauncher64Path).getInputStream();
             } else {
-                resStream = RESOURCE_LOADER.getResource("classpath:/launchers/x86/install.exe").getInputStream();
+                resStream = RESOURCE_LOADER.getResource(installLauncher32Path).getInputStream();
             }
             copyLarge(resStream, zip);
             ZipFunction zipper = new ZipFunction(jre, prefix + "/jre", zip);
