@@ -15,7 +15,7 @@ Add common library as a dependency:
     <dependency>
         <groupId>com.alexkasko.installer</groupId>
         <artifactId>windows-service-installer-common</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
     </dependency>
 
 Implement `com.alexkasko.installer.DaemonLauncher` in application launcher class:
@@ -35,12 +35,12 @@ Add plugin to build part of pom file:
         <!-- to be run with "mvn windows-service-installer:installer" -->
         <groupId>com.alexkasko.installer</groupId>
         <artifactId>maven-windows-service-installer-plugin</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
         <dependencies>
             <dependency>
                 <groupId>com.alexkasko.installer</groupId>
                 <artifactId>windows-service-installer-common</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6</version>
             </dependency>
         </dependencies>
         <configuration>
@@ -57,6 +57,12 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**1.0.6** (2014-09-17)
+
+ * support for custom packs
+ * icons customizations
+ * extended support for `eng` locale
 
 **1.0.5** (2014-08-02)
 
