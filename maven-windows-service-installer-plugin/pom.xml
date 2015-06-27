@@ -10,22 +10,6 @@
     <packaging>maven-plugin</packaging>
     <name>Maven Windows Service Installer Plugin</name>
 
-    <description>
-        Maven plugin to build installers with Windows service support.
-    </description>
-    <url>https://github.com/alexkasko/windows-service-installer</url>
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
-    <scm>
-        <url>https://github.com/alexkasko/windows-service-installer</url>
-        <connection>scm:git:https://github.com/alexkasko/windows-service-installer.git</connection>
-        <developerConnection>scm:git:https://github.com/alexkasko/windows-service-installer.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
     <developers>
         <developer>
             <name>Alex Kasko</name>
@@ -68,7 +52,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>4.1.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>

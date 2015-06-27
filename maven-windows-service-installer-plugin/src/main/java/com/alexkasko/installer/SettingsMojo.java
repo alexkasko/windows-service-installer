@@ -1,10 +1,8 @@
 package com.alexkasko.installer;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
-import ru.concerteza.util.io.CtzResourceUtils;
 
 import java.io.File;
 import java.util.List;
@@ -23,7 +21,7 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Application directories to be included into installer
      *
-     * @parameter expression="${installer.appDataDirs}"
+     * @parameter property="${installer.appDataDirs}"
      * @required
      */
     protected List<String> appDataDirs;
@@ -33,44 +31,44 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Path to windows JRE
      *
-     * @parameter expression="${installer.jreDir}" default-value="${java.home}"
+     * @parameter property="${installer.jreDir}" default-value="${java.home}"
      */
     protected File jreDir;
     /**
      * Whether JRE is 64 bit
      *
-     * @parameter expression="${installer.use64BitJre}" default-value="false"
+     * @parameter property="${installer.use64BitJre}" default-value="false"
      */
     protected boolean use64BitJre;
     /**
      * Use x86 launcher binaries for x64 installers instead of default x64 ones
      *
-     * @parameter expression="${installer.useX86LaunchersForX64Installer}" default-value="false"
+     * @parameter property="${installer.useX86LaunchersForX64Installer}" default-value="false"
      *
      */
     protected boolean useX86LaunchersForX64Installer;
     /**
      * Resource path to x86 installer launcher
      *
-     * @parameter expression="${installer.installLauncher32Path}" default-value="classpath:/launchers/x86/install.exe"
+     * @parameter property="${installer.installLauncher32Path}" default-value="classpath:/launchers/x86/install.exe"
      */
     protected String installLauncher32Path;
     /**
      * Resource path to x86 uninstaller launcher
      *
-     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x86/uninstall.exe"
+     * @parameter property="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x86/uninstall.exe"
      */
     protected String uninstallLauncher32Path;
     /**
      * Resource path to x64 installer launcher
      *
-     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/install.exe"
+     * @parameter property="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/install.exe"
      */
     protected String installLauncher64Path;
     /**
      * Resource path to x64 uninstaller launcher
      *
-     * @parameter expression="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/uninstall.exe"
+     * @parameter property="${installer.uninstallLauncher32Path}" default-value="classpath:/launchers/x64/uninstall.exe"
      */
     protected String uninstallLauncher64Path;
 
@@ -79,92 +77,92 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Application name displayed in installer
      *
-     * @parameter expression="${installer.izpackAppName}" default-value="${project.name}"
+     * @parameter property="${installer.izpackAppName}" default-value="${project.name}"
      */
     protected String izpackAppName;
     /**
      * Application version displayed in installer
      *
-     * @parameter expression="${installer.izpackAppVersion}" default-value="${project.version}"
+     * @parameter property="${installer.izpackAppVersion}" default-value="${project.version}"
      */
     protected String izpackAppVersion;
     /**
      * Installer language, see http://izpack.org/documentation/installation-files.html#the-localization-element-locale
      *
-     * @parameter expression="${installer.izpackLang}" default-value="xxx"
+     * @parameter property="${installer.izpackLang}" default-value="xxx"
      */
     protected String izpackLang;
     /**
      * Installer compress option, values are 'raw' (default), 'deflate' and 'bzip2'
      *
-     * @parameter expression="${installer.izpackCompress}" default-value="raw"
+     * @parameter property="${installer.izpackCompress}" default-value="raw"
      */
     protected String izpackCompress;
     /**
      * Default installation directory
      *
-     * @parameter expression="${installer.izpackDefaultInstallDir}" default-value="$USER_HOME\\${project.name}"
+     * @parameter property="${installer.izpackDefaultInstallDir}" default-value="$USER_HOME\\${project.name}"
      */
     protected String izpackDefaultInstallDir;
     /**
      * Application Files pack name
      *
-     * @parameter expression="${installer.izpackAppFilesPackName}" default-value="Application Files"
+     * @parameter property="${installer.izpackAppFilesPackName}" default-value="Application Files"
      */
     protected String izpackAppFilesPackName;
     /**
      * Application Files pack description
      *
-     * @parameter expression="${installer.izpackAppFilesPackDescription}" default-value="Necessary application files"
+     * @parameter property="${installer.izpackAppFilesPackDescription}" default-value="Necessary application files"
      */
     protected String izpackAppFilesPackDescription;
     /**
      * JRE pack name
      *
-     * @parameter expression="${installer.izpackJREPackName}" default-value="Java Runtime Environment"
+     * @parameter property="${installer.izpackJREPackName}" default-value="Java Runtime Environment"
      */
     protected String izpackJREPackName;
     /**
      * JRE pack description
      *
-     * @parameter expression="${installer.izpackJREPackName}" default-value="Java Runtime Environment"
+     * @parameter property="${installer.izpackJREPackName}" default-value="Java Runtime Environment"
      */
     protected String izpackJREPackDescription;
     /**
      * Windows Service pack name
      *
-     * @parameter expression="${installer.izpackWindowsServicePackName}" default-value="Windows Service Installer"
+     * @parameter property="${installer.izpackWindowsServicePackName}" default-value="Windows Service Installer"
      */
     protected String izpackWindowsServicePackName;
     /**
      * Windows Service pack description
      *
-     * @parameter expression="${installer.izpackWindowsServicePackDescription}"
+     * @parameter property="${installer.izpackWindowsServicePackDescription}"
      * default-value="Application will be installed as Windows Service using prunsrv tool from Apache Commons Daemon project, see http://commons.apache.org/daemon"
      */
     protected String izpackWindowsServicePackDescription;
     /**
      * Icon to be used on top of installer frame
      *
-     * @parameter expression="${installer.izpackFrameIconPath}" default-value="classpath:/izpack/install.png"
+     * @parameter property="${installer.izpackFrameIconPath}" default-value="classpath:/izpack/install.png"
      */
     protected String izpackFrameIconPath;
     /**
      * Icon to be used on Hello screen
      *
-     * @parameter expression="${installer.izpackHelloIconPath}" default-value="classpath:/izpack/install.png"
+     * @parameter property="${installer.izpackHelloIconPath}" default-value="classpath:/izpack/install.png"
      */
     protected String izpackHelloIconPath;
     /**
      * Definition of additional installer packs
      *
-     * @parameter expression="${installer.izpackAdditionalPacksPath}" default-value="classpath:/izpack/addpacks.xml"
+     * @parameter property="${installer.izpackAdditionalPacksPath}" default-value="classpath:/izpack/addpacks.xml"
      */
     protected String izpackAdditionalPacksPath;
     /**
      * Definition of additional resources
      *
-     * @parameter expression="${installer.izpackAdditionalResourcePaths}"
+     * @parameter property="${installer.izpackAdditionalResourcePaths}"
      */
     protected List<String> izpackAdditionalResourcePaths;
 
@@ -174,38 +172,38 @@ public abstract class SettingsMojo extends AbstractMojo {
      * For non-ASCII service display name and description non-ASCII characters must be encoded in
      * .bat files in appropriate MS-DOS CpXXX encoding
      *
-     * @parameter expression="${installer.prunsrvScriptsEncoding}" default-value="UTF-8"
+     * @parameter property="${installer.prunsrvScriptsEncoding}" default-value="UTF-8"
      */
     protected String prunsrvScriptsEncoding;
     /**
      * Name of the launcher JAR file
      *
-     * @parameter expression="${installer.prunsrvLauncherJarFile}" default-value="${project.artifactId}.jar"
+     * @parameter property="${installer.prunsrvLauncherJarFile}" default-value="${project.artifactId}.jar"
      */
     protected String prunsrvLauncherJarFile;
     /**
      * Name of the launcher JAR file
      *
-     * @parameter expression="${installer.prunsrvStartupMode}" default-value="auto"
+     * @parameter property="${installer.prunsrvStartupMode}" default-value="auto"
      */
     protected String prunsrvStartupMode;
     /**
      * Windows service name
      *
-     * @parameter expression="${installer.prunsrvServiceName}" default-value="${project.artifactId}"
+     * @parameter property="${installer.prunsrvServiceName}" default-value="${project.artifactId}"
      */
     protected String prunsrvServiceName;
     /**
      * Start class that will be used with prunsrv
      *
-     * @parameter expression="${installer.prunsrvStartClass}" default-value="com.alexkasko.installer.StandardLauncher"
+     * @parameter property="${installer.prunsrvStartClass}" default-value="com.alexkasko.installer.StandardLauncher"
      */
     protected String prunsrvStartClass;
     /**
      * Application class implementing com.alexkasko.installer.DaemonLauncher.
      * Will be called by StandardLauncher (prunsrvStartClass) by default
      *
-     * @parameter expression="${installer.prunsrvDaemonLauncherClass}"
+     * @parameter property="${installer.prunsrvDaemonLauncherClass}"
      * @required
      */
     protected String prunsrvDaemonLauncherClass;
@@ -213,99 +211,99 @@ public abstract class SettingsMojo extends AbstractMojo {
      * Input params for prunsrvStartMethod
      * Default value 'start;${installer.prunsrvDaemonLauncherClass}' will be substituted in getter
      *
-     * @parameter expression="${installer.prunsrvStartParams}"
+     * @parameter property="${installer.prunsrvStartParams}"
      */
     protected String prunsrvStartParams;
     /**
      * Stop class that will be used with prunsrv
      * Default value '${installer.prunsrvDaemonLauncherClass}' will be substituted in getter
      *
-     * @parameter expression="${installer.prunsrvStopClass}" default-value="com.alexkasko.installer.StandardLauncher"
+     * @parameter property="${installer.prunsrvStopClass}" default-value="com.alexkasko.installer.StandardLauncher"
      */
     protected String prunsrvStopClass;
     /**
      * Input params for prunsrvStopParams
      * Default value 'stop;${installer.prunsrvDaemonLauncherClass}' will be substituted in getter
      *
-     * @parameter expression="${installer.prunsrvStopParams}"
+     * @parameter property="${installer.prunsrvStopParams}"
      */
     protected String prunsrvStopParams;
     /**
      * JVM options, delimiter is ';', use separate maven options for XMs, XMx and XSs
      *
-     * @parameter expression="${installer.prunsrvJvmOptions}"
+     * @parameter property="${installer.prunsrvJvmOptions}"
      */
     protected String prunsrvJvmOptions = "";
     /**
      * JVM XMs option in MB
      *
-     * @parameter expression="${installer.prunsrvJvmMs}" default-value="64"
+     * @parameter property="${installer.prunsrvJvmMs}" default-value="64"
      */
     protected int prunsrvJvmMs;
     /**
      * JVM XMx option in MB
      *
-     * @parameter expression="${installer.prunsrvJvmMx}" default-value="1024"
+     * @parameter property="${installer.prunsrvJvmMx}" default-value="1024"
      */
     protected int prunsrvJvmMx;
     /**
      * JVM XSs option in KB
      *
-     * @parameter expression="${installer.prunsrvJvmSs}" default-value="512"
+     * @parameter property="${installer.prunsrvJvmSs}" default-value="512"
      */
     protected int prunsrvJvmSs;
     /**
      * Windows service display name
      *
-     * @parameter expression="${installer.prunsrvDisplayName}" default-value="${project.name}"
+     * @parameter property="${installer.prunsrvDisplayName}" default-value="${project.name}"
      */
     protected String prunsrvDisplayName;
     /**
      * Windows service description
      *
-     * @parameter expression="${installer.prunsrvDescription}" default-value="${project.name}"
+     * @parameter property="${installer.prunsrvDescription}" default-value="${project.name}"
      */
     protected String prunsrvDescription;
     /**
      * Prunsrv service stop timeout in seconds
      *
-     * @parameter expression="${installer.prunsrvStopTimeout}" default-value="0"
+     * @parameter property="${installer.prunsrvStopTimeout}" default-value="0"
      */
     protected int prunsrvStopTimeout;
     /**
      * Prunsrv log path, relative to APP_ROOT
      *
-     * @parameter expression="${installer.prunsrvLogPath}" default-value="logs"
+     * @parameter property="${installer.prunsrvLogPath}" default-value="logs"
      */
     protected String prunsrvLogPath;
     /**
      * Prunsrv log prefix
      *
-     * @parameter expression="${installer.prunsrvLogPrefix}" default-value="daemon"
+     * @parameter property="${installer.prunsrvLogPrefix}" default-value="daemon"
      */
     protected String prunsrvLogPrefix;
     /**
      * Prunsrv log level
      *
-     * @parameter expression="${installer.prunsrvLogLevel}" default-value="INFO"
+     * @parameter property="${installer.prunsrvLogLevel}" default-value="INFO"
      */
     protected String prunsrvLogLevel;
       /**
      * Std out file, relative to APP_ROOT
      *
-     * @parameter expression="${installer.prunsrvStdOutput}" default-value="logs\\std_out.txt"
+     * @parameter property="${installer.prunsrvStdOutput}" default-value="logs\\std_out.txt"
      */
     protected String prunsrvStdOutput;
     /**
      * Std out file, relative to APP_ROOT
      *
-     * @parameter expression="${installer.prunsrvStdError}" default-value="logs\\std_err.txt"
+     * @parameter property="${installer.prunsrvStdError}" default-value="logs\\std_err.txt"
      */
     protected String prunsrvStdError;
     /**
      * Whether to start service immediately after installation
      *
-     * @parameter expression="${installer.prunsrvStartOnInstrall}" default-value="true"
+     * @parameter property="${installer.prunsrvStartOnInstrall}" default-value="true"
      */
     protected boolean prunsrvStartOnInstrall;
 
@@ -314,25 +312,25 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Base directory of compilation process
      *
-     * @parameter expression="${installer.baseDir}" default-value="${project.build.directory}/izpack"
+     * @parameter property="${installer.baseDir}" default-value="${project.build.directory}/izpack"
      */
     protected File izpackDir;
     /**
      * Directory of distribution before for packaging
      *
-     * @parameter expression="${installer.distDir}" default-value="${project.build.directory}/izpack/dist"
+     * @parameter property="${installer.distDir}" default-value="${project.build.directory}/izpack/dist"
      */
     protected File distDir;
     /**
      * IzPack config file
      *
-     * @parameter expression="${installer.installConfigFile}"
+     * @parameter property="${installer.installConfigFile}"
      */
     protected File installConfigFile;
     /**
      * Base directory of compilation process
      *
-     * @parameter expression="${installer.buildOutputFile}" default-value="${project.build.directory}/izpack/build.log"
+     * @parameter property="${installer.buildOutputFile}" default-value="${project.build.directory}/izpack/build.log"
      */
     protected File buildOutputFile;
     /**
@@ -345,19 +343,19 @@ public abstract class SettingsMojo extends AbstractMojo {
     /**
      * Output file (installer)
      *
-     * @parameter expression="${installer.installerOutputFile}" default-value="${project.build.directory}/${project.artifactId}-${project.version}-installer.zip"
+     * @parameter property="${installer.installerOutputFile}" default-value="${project.build.directory}/${project.artifactId}-${project.version}-installer.zip"
      */
     protected File installerOutputFile;
     /**
      * Whether to build unix tar.gz distribution
      *
-     * @parameter expression="${installer.buildUnixDist}" default-value="false"
+     * @parameter property="${installer.buildUnixDist}" default-value="false"
      */
     protected boolean buildUnixDist;
     /**
      * Output file (distibution)
      *
-     * @parameter expression="${installer.distOutputFile}" default-value="${project.build.directory}/${project.artifactId}-dist.tgz"
+     * @parameter property="${installer.distOutputFile}" default-value="${project.build.directory}/${project.artifactId}-dist.tgz"
      */
     protected File distOutputFile;
     /**

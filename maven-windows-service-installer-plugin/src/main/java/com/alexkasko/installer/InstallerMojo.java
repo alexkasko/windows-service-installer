@@ -286,8 +286,8 @@ public class InstallerMojo extends SettingsMojo {
                 OutputStream out = null;
                 try {
                     file = new File(dir, name.substring(0, name.length() - 4));
-                    OutputStream os = openOutputStream(file);
-                    freemarker.process(input.getInputStream(), InstallerMojo.this, os, ftlOutputEncoding);
+                    out = openOutputStream(file);
+                    freemarker.process(input.getInputStream(), InstallerMojo.this, out, ftlOutputEncoding);
                 } catch (IOException e) {
                     throw new UnhandledException(e);
                 } finally {
